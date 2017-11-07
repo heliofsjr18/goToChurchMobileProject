@@ -29,8 +29,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".GTC_LoginActivity" />
-        <activity android:name=".GTC_SignUpActivity" />
-        <activity android:name=".GTC_NewChurchActivity" />
+        <activity android:name=".GTC_SignUpActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".GTC_NewChurchActivity" android:screenOrientation="portrait" />
         <activity
             android:name=".GTC_WelcomeActivity"
             android:label="@string/title_activity_gtc__welcome"

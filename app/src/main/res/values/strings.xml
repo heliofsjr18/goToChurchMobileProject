@@ -21,4 +21,15 @@
         completions."
     </string>
     <string name="title_activity_gtc__maps">Map</string>
+
+    <!-- SignUpLayOut-->
+    <string name="signUpName">Name</string>
+    <string name="signUpBirthday">Birthday</string>
+    <string name="signUpEmail">Email</string>
+    <string name="signUpPhone">Phone Number</string>
+    <string name="newChurchResponsible">Responsible</string>
+    <string name="newChurchName">Church Name</string>
+    <string name="newChurchAdjunt">Adjunt</string>
+    <string name="newChurchPhone">Phone Number</string>
+    <!-- SignUpLayOut-->
 </resources>

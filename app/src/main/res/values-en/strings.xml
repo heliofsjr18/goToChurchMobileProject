@@ -31,12 +31,5 @@
     <string name="newChurchName">Church Name</string>
     <string name="newChurchAdjunt">Adjunt</string>
     <string name="newChurchPhone">Phone Number</string>
-    <string name="SignIn">Sign In</string>
-    <string name="Register">Register</string>
-    <string name="save">Save</string>
-    <string name="streetName">Street Name</string>
-    <string name="district">District</string>
-    <string name="city">City</string>
-    <string name="homeNumber">Home Number</string>
     <!-- SignUpLayOut-->
 </resources>

@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">GoToChurchMobileProject</string>
+    <string name="title_activity_gtc__welcome">Bem Vindo</string>
+
+    <string name="navigation_drawer_open">Abrir drawer de Navegação</string>
+    <string name="navigation_drawer_close">Fechar drawer de Navegação</string>
+
+    <string name="action_settings">Configuração</string>
+    <string name="title_activity_gtc__auto_login">Entrar</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Senha (optional)</string>
+    <string name="action_sign_in">Entrar ou Registrar</string>
+    <string name="action_sign_in_short">Entrar</string>
+    <string name="error_invalid_email">Este endereço de emil é invalido</string>
+    <string name="error_invalid_password">Essa senha é muito curta</string>
+    <string name="error_incorrect_password">Sua senha está incorreta</string>
+    <string name="error_field_required">Este campo é obrigatório</string>
+    <string name="permission_rationale">"Contactar permissões são necessários para prover completion de email."
+    </string>
+    <string name="title_activity_gtc__maps">Mapa</string>
+
+    <!-- SignUpLayOut-->
+    <string name="signUpName">Nome</string>
+    <string name="signUpBirthday">Data de Nascimento</string>
+    <string name="signUpEmail">Email</string>
+    <string name="signUpPhone">Número de telefone</string>
+    <string name="newChurchResponsible">Responsável</string>
+    <string name="newChurchName">Nome da Igreja</string>
+    <string name="newChurchAdjunt">Complemento</string>
+    <string name="newChurchPhone">Numero de telefone</string>
+    <string name="SignIn">Entrar</string>
+    <string name="Register">Registrar</string>
+    <string name="save">Salvar</string>
+    <string name="streetName">Street Name</string>
+    <string name="district">District</string>
+    <string name="homeNumber">Home Number</string>
+    <!-- SignUpLayOut-->
+</resources>

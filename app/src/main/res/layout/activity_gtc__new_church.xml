@@ -4,86 +4,97 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.helio.gotochurchmobileproject.GTC_SignUpActivity">
+    tools:context="com.example.helio.gotochurchmobileproject.GTC_SignUpActivity"
+    android:background="@color/colorPrimaryDark">
 
-    <TextView
-        android:id="@+id/textView_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/newChurchName"
-        tools:layout_editor_absoluteX="53dp"
-        tools:layout_editor_absoluteY="45dp" />
+    <ImageView
+        android:id="@+id/imageView_signUp_Screen"
+        android:layout_width="256dp"
+        android:layout_height="275dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/iconchurchtoggle"/>
 
     <EditText
         android:id="@+id/editText_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
+        android:hint="@string/newChurchName"
         android:inputType="textPersonName"
-        android:text="Name"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="79dp" />
-
-    <TextView
-        android:id="@+id/textView_responsible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/newChurchResponsible"
-        tools:layout_editor_absoluteX="44dp"
-        tools:layout_editor_absoluteY="160dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_signUp_Screen" />
 
     <EditText
         android:id="@+id/editText_responsible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
+        android:hint="@string/newChurchResponsible"
         android:inputType="textPersonName"
-        android:text="Name"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="192dp" />
-
-    <TextView
-        android:id="@+id/textView_adjunct"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/newChurchAdjunt"
-        tools:layout_editor_absoluteX="105dp"
-        tools:layout_editor_absoluteY="255dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_name" />
 
     <EditText
         android:id="@+id/editText_adjunct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
+        android:hint="@string/newChurchAdjunt"
         android:inputType="textLongMessage"
-        android:text="Name"
-        tools:layout_editor_absoluteX="44dp"
-        tools:layout_editor_absoluteY="283dp" />
-
-    <TextView
-        android:id="@+id/textView_phone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/newChurchPhone"
-        tools:layout_editor_absoluteX="116dp"
-        tools:layout_editor_absoluteY="351dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_responsible" />
 
     <EditText
         android:id="@+id/editText_phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
+        android:hint="@string/newChurchPhone"
         android:inputType="phone"
-        android:text="Name"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="387dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_adjunct" />
 
     <ImageButton
         android:id="@+id/imageButton_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ic_action_name"
-        tools:layout_editor_absoluteX="146dp"
-        tools:layout_editor_absoluteY="462dp" />
+        android:layout_marginLeft="8dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginRight="8dp" />
 
 </android.support.constraint.ConstraintLayout>

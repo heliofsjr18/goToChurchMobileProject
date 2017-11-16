@@ -17,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/iconchurchtoggle" />
+        app:srcCompat="@drawable/iconchurchtoggle" android:contentDescription="@string/todo" />
 
     <EditText
         android:id="@+id/editText"
@@ -27,7 +27,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="Name"
+        android:hint="@string/name"
         android:inputType="none"
         android:selectAllOnFocus="false"
         android:singleLine="true"
@@ -44,7 +44,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="Password"
+        android:hint="@string/password"
         android:inputType="textPassword"
         android:textColor="@color/CornflowerBlue"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,6 +59,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:onClick="entrar"
         android:text="@string/SignIn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -31,8 +31,5 @@
     <string name="newChurchName">Church Name</string>
     <string name="newChurchAdjunt">Adjunt</string>
     <string name="newChurchPhone">Phone Number</string>
-    <string name="name">Email</string>
-    <string name="password">Password</string>
-    <string name="todo" />
     <!-- SignUpLayOut-->
 </resources>

@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -62,7 +63,15 @@
             android:name=".GTC_MapsActivity"
             android:label="@string/title_activity_gtc__maps"
             android:screenOrientation="portrait" />
-        <activity android:name=".GTC_NewAddressActivity"></activity>
+        <activity android:name=".GTC_NewAddressActivity" />
+        <activity
+            android:name=".GTC_ListaSetores"
+            android:label="@string/title_activity_gtc__lista_setores"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".GTC_ChurchListActivity"
+            android:label="@string/title_activity_gtc__church_list"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

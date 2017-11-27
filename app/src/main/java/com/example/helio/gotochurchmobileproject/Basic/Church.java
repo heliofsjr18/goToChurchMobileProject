@@ -12,6 +12,7 @@ public class Church {
     private String responsible;
     private Address address;
     private String adjunct;
+    private int resIdImagem;
 
     public String getName() {
         return name;

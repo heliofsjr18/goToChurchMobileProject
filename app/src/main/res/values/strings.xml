@@ -41,5 +41,7 @@
     <string name="name" />
     <string name="password" />
     <string name="todo" />
+    <string name="title_activity_gtc__lista_setores">Setores</string>
+    <string name="title_activity_gtc__church_list">Congregações</string>
     <!-- SignUpLayOut-->
 </resources>

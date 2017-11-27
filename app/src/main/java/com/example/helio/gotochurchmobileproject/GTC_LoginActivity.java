@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.helio.gotochurchmobileproject.Util.WebConection;
 import com.example.helio.gotochurchmobileproject.Util.WebService;
 
 import org.json.JSONArray;
@@ -91,15 +92,20 @@ public class GTC_LoginActivity extends AppCompatActivity {
     }
 
     void entrar(View v){
-        //Toast.makeText(this, this.URL, Toast.LENGTH_SHORT).show();
-        if(this.verificaLogin()){
-            Bundle bundle = new Bundle();
-            bundle.putString("dadosUsuario", this.dadosUsuario);
-            Intent it = new Intent(this, GTC_WelcomeActivity.class);
-            it.putExtras(bundle);
-            startActivity(it);
+        WebConection wc = new WebConection();
+
+        if(wc.isOnline(this)){
+            if(this.verificaLogin()){
+                Bundle bundle = new Bundle();
+                bundle.putString("dadosUsuario", this.dadosUsuario);
+                Intent it = new Intent(this, GTC_WelcomeActivity.class);
+                it.putExtras(bundle);
+                startActivity(it);
+            }else{
+                Toast.makeText(this, "Login Inválido!", Toast.LENGTH_SHORT).show();
+            }
         }else{
-            Toast.makeText(this, "Login Inválido!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Verifique sua conexão com a internet!", Toast.LENGTH_SHORT).show();
         }
 =======
 >>>>>>> parent of fe0517e... SqlLite implementado...

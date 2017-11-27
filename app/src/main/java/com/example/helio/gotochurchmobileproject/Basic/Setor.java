@@ -1,0 +1,35 @@
+package com.example.helio.gotochurchmobileproject.Basic;
+
+/**
+ * Created by dayvson on 25/11/17.
+ */
+
+public class Setor {
+    private int id;
+    private int numero;
+    private Coordenador coordenador;
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+    public Coordenador getCoordenador() {
+        return coordenador;
+    }
+
+    public void setCoordenador(Coordenador coordenador) {
+        this.coordenador = coordenador;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+}

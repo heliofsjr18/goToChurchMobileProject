@@ -36,5 +36,8 @@
     <string name="streetName">Street Name</string>
     <string name="district">District</string>
     <string name="homeNumber">Home Number</string>
+    <string name="name">Email</string>
+    <string name="password">Senha</string>
+    <string name="todo" />
     <!-- SignUpLayOut-->
 </resources>

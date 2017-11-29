@@ -1,16 +1,10 @@
 package com.example.helio.gotochurchmobileproject;
 
 import android.content.Intent;
-<<<<<<< HEAD
 import android.os.Bundle;
 import android.os.StrictMode;
-=======
-import android.os.PersistableBundle;
->>>>>>> parent of fe0517e... SqlLite implementado...
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
-<<<<<<< HEAD
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -24,12 +18,12 @@ public class GTC_LoginActivity extends AppCompatActivity {
     WebService ws;
     String URL = "http://dayvsonnascimento.pythonanywhere.com/gotochurch/usuario/login";
     String dadosUsuario = "";
-=======
-
-public class GTC_LoginActivity extends AppCompatActivity {
 
 
->>>>>>> parent of fe0517e... SqlLite implementado...
+
+
+
+
     private View.OnClickListener onClickListenerSignUp = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -47,7 +41,6 @@ public class GTC_LoginActivity extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
 
         findViewById(R.id.button_signUp).setOnClickListener(onClickListenerSignUp);
-<<<<<<< HEAD
     }
 
     private boolean verificaLogin(){
@@ -59,7 +52,7 @@ public class GTC_LoginActivity extends AppCompatActivity {
         String senha = String.valueOf(editTextSenha.getText());//pega valor do editTest de senha
         this.URL = "http://dayvsonnascimento.pythonanywhere.com/gotochurch/usuario/login";
         this.URL += "?email="+email+"&senha="+senha;
-        //Toast.makeText(this, this.URL, Toast.LENGTH_SHORT).show();
+
         ws = new WebService();
         boolean retorno = false;
         try{
@@ -107,7 +100,5 @@ public class GTC_LoginActivity extends AppCompatActivity {
         }else{
             Toast.makeText(this, "Verifique sua conexão com a internet!", Toast.LENGTH_SHORT).show();
         }
-=======
->>>>>>> parent of fe0517e... SqlLite implementado...
     }
 }

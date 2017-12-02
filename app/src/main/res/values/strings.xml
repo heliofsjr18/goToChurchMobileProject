@@ -7,7 +7,7 @@
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_gtc__auto_login">Sign in</string>
-
+    <string name="hello_blank_fragment">Fragment</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>

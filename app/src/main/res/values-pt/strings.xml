@@ -33,11 +33,13 @@
     <string name="SignIn">Entrar</string>
     <string name="Register">Registrar</string>
     <string name="save">Salvar</string>
-    <string name="streetName">Street Name</string>
-    <string name="district">District</string>
-    <string name="homeNumber">Home Number</string>
-    <string name="name">Email</string>
-    <string name="password">Senha</string>
-    <string name="todo" />
+    <string name="streetName">Rua</string>
+    <string name="district">Bairro</string>
+    <string name="city">Cidade</string>
+    <string name="homeNumber">Número da Residencia</string>
+    <string name="SignUpLayOutName" >Nome</string>
+    <string name="SignUpLayOutPassword">Senha</string>
+    <string name="title_activity_gtc__lista_setores">Setores</string>
+    <string name="title_activity_gtc__church_list">Congregações</string>
     <!-- SignUpLayOut-->
 </resources>

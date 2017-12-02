@@ -67,13 +67,13 @@ public class GTC_MapsActivity extends FragmentActivity implements OnMapReadyCall
                 if(church.getString("latitude").equals("")){
                     c.setLat(0);
                 }else{
-                    c.setLat(Long.parseLong(church.getString("latitude")));
+                    c.setLat(Double.parseDouble(church.getString("latitude")));
                 }
 
                 if(church.getString("logitude").equals("")){
                     c.setLng(0);
                 }else{
-                    c.setLng(Long.parseLong(church.getString("logitude")));
+                    c.setLng(Double.parseDouble(church.getString("logitude")));
                 }
 
 
@@ -122,9 +122,10 @@ public class GTC_MapsActivity extends FragmentActivity implements OnMapReadyCall
         Toast.makeText(this, ""+this.church, Toast.LENGTH_SHORT).show();
 
         for (Church c: this.church){
+            //LatLng l = new LatLng(-8.056030,0);
             LatLng p = new LatLng(c.getLat(), c.getLng());
             mMap.addMarker(new MarkerOptions().position(p).title(c.getName()).icon(BitmapDescriptorFactory.fromResource(R.drawable.churchmarker)));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(p, 4));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(p, 5));
         }
 
         /*try{

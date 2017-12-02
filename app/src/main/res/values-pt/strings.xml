@@ -21,6 +21,9 @@
     </string>
     <string name="title_activity_gtc__maps">Mapa</string>
 
+    <string name="name">Email</string>
+    <string name="password" >Senha</string>
+
     <!-- SignUpLayOut-->
     <string name="signUpName">Nome</string>
     <string name="signUpBirthday">Data de Nascimento</string>

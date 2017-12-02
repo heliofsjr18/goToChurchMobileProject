@@ -88,14 +88,15 @@ public class GTC_LoginActivity extends AppCompatActivity {
     }
 
     void entrar(View v){
-        WebConection wc = new WebConection();
+        try {
+            WebConection wc = new WebConection();
 
-        if(wc.isOnline(this)){
-            if(this.verificaLogin()){
-                Bundle bundle = new Bundle();
-                bundle.putString("dadosUsuario", this.dadosUsuario);
+            if(wc.isOnline(this)){
+                if(this.verificaLogin()){
+                    Bundle bundle = new Bundle();
+                    bundle.putString("dadosUsuario", this.dadosUsuario);
 
-                try {
+
                     JSONArray resultJson = new JSONArray(this.dadosUsuario);
                     JSONObject result;
 
@@ -117,22 +118,25 @@ public class GTC_LoginActivity extends AppCompatActivity {
 
 
                             DAOUser daoUser = new DAOUser(getBaseContext());
+                            Toast.makeText(this, "SQLite", Toast.LENGTH_SHORT).show();
                             daoUser.insereUsuario(u);
                         }
                     }
-                }catch (Exception e){
 
+
+
+                    Intent it = new Intent(this, GTC_WelcomeActivity.class);
+                    it.putExtras(bundle);
+                    startActivity(it);
+                }else{
+                    Toast.makeText(this, "Login Inválido!", Toast.LENGTH_SHORT).show();
                 }
-
-
-                Intent it = new Intent(this, GTC_WelcomeActivity.class);
-                it.putExtras(bundle);
-                startActivity(it);
             }else{
-                Toast.makeText(this, "Login Inválido!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Verifique sua conexão com a internet!", Toast.LENGTH_SHORT).show();
             }
-        }else{
-            Toast.makeText(this, "Verifique sua conexão com a internet!", Toast.LENGTH_SHORT).show();
+
+        }catch (Exception e){
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 }

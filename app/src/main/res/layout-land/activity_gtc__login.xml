@@ -55,6 +55,7 @@
         android:layout_marginStart="80dp"
         android:layout_marginTop="32dp"
         android:text="@string/SignIn"
+        android:onClick="entrar"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/editText4"
         android:layout_marginLeft="80dp" />

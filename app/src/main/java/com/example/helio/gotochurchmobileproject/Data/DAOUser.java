@@ -37,9 +37,9 @@ public class DAOUser {
         db.close();
 
         if(resultado == -1){
-            return "Erro ao inserir registro";
+            return "Erro ao inserir registro.";
         }else {
-            return "Usuario registrado com sucesso";
+            return "Usuário registrado com sucesso.";
         }
     }
 

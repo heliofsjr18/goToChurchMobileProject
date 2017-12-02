@@ -38,12 +38,11 @@
     <string name="district">District</string>
     <string name="city">City</string>
     <string name="homeNumber">Home Number</string>
-    <string name="SignUpLayOutName">Name</string>
-    <string name="SignUpLayOutPassword">Password</string>
-    <string name="title_activity_gtc__lista_setores">Sectors</string>
-    <string name="title_activity_gtc__church_list">Churchs</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="name" />
+    <string name="password" />
+    <string name="todo" />
+    <string name="title_activity_gtc__lista_setores">Setores</string>
+    <string name="title_activity_gtc__church_list">Congregações</string>
+    <string name="title_activity_gtc__lista_area">GTC_ListaAreaActivity</string>
     <!-- SignUpLayOut-->
 </resources>

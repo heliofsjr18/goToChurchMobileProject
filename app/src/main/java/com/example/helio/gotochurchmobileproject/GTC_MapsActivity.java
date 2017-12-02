@@ -4,7 +4,11 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import com.example.helio.gotochurchmobileproject.Basic.Address;
+import com.example.helio.gotochurchmobileproject.Basic.Church;
+import com.example.helio.gotochurchmobileproject.Util.WebService;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -13,21 +17,85 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 public class GTC_MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private ProgressBar progress;
+
+    public WebService ws;
+    public String URL = "http://dayvsonnascimento.pythonanywhere.com/gotochurch/congregacao/listarCongregacao";
+    public ArrayList<Church> church;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gtc__maps);
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        ws = new WebService();
+
+
     }
 
+    public void listChurch(){
+        try {
+            String stringChurch = this.ws.getUrlContents(this.URL); //Chama função que consome o web service
 
+            JSONArray churchJson = new JSONArray(stringChurch);
+            JSONObject church;
+
+            this.church = new ArrayList<>();
+
+            for (int i = 0; i < churchJson.length(); i++) {
+                church = new JSONObject(churchJson.getString(i));
+
+                Church c = new Church();
+                Address a = new Address();
+                c.setId(Integer.parseInt(church.getString("id")));
+                c.setName(church.getString("nome"));
+                c.setResponsible("Coordenador: "+church.getString("coordenador"));
+
+                if(church.getString("latitude").equals("")){
+                    c.setLat(0);
+                }else{
+                    c.setLat(Double.parseDouble(church.getString("latitude")));
+                }
+
+                if(church.getString("logitude").equals("")){
+                    c.setLng(0);
+                }else{
+                    c.setLng(Double.parseDouble(church.getString("logitude")));
+                }
+
+
+
+                a.setCity(church.getString("cidade"));
+                a.setHomeNumber(church.getString("numero"));
+                a.setStreetName(church.getString("rua"));
+                a.setDistrict(church.getString("bairro"));
+                a.setState("Pernambuco");
+
+
+                c.setAddress(a);
+
+                this.church.add(c);
+
+            }
+
+        }catch (Exception e){
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+
+    }
 
     /**
      * Manipulates the map once available.
@@ -52,6 +120,12 @@ public class GTC_MapsActivity extends FragmentActivity implements OnMapReadyCall
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney2));
         //mMap.setMinZoomPreference(1);
         //mMap.setMaxZoomPreference(3);
+        Toast.makeText(this, ""+this.church, Toast.LENGTH_SHORT).show();
+        /*for (Church c: this.church){
+            LatLng p = new LatLng(c.getLat(), c.getLng());
+            mMap.addMarker(new MarkerOptions().position(p).title(c.getName()).icon(BitmapDescriptorFactory.fromResource(R.drawable.churchmarker)));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(p, 4));
+        }*/
 
         /*try{
 

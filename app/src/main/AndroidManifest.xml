@@ -84,7 +84,8 @@
         <activity
             android:name=".GTC_ListaAreaActivity"
             android:label="@string/title_activity_gtc__lista_area"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".Util.GTC_PageViewActivity"></activity>
     </application>
 
 </manifest>

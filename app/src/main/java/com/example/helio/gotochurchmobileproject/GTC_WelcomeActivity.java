@@ -15,6 +15,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.helio.gotochurchmobileproject.Util.GTC_PageViewActivity;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -149,5 +151,10 @@ public class GTC_WelcomeActivity extends AppCompatActivity
     void cardViewCLick(View v)
     {
         Toast.makeText(this, "teste", Toast.LENGTH_SHORT).show();
+    }
+
+    void pgv(View v){
+        Intent it = new Intent(this, GTC_PageViewActivity.class);
+        startActivity(it);
     }
 }

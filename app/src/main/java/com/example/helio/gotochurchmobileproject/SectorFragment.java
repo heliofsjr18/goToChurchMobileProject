@@ -1,19 +1,29 @@
 package com.example.helio.gotochurchmobileproject;
 
+//import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.helio.gotochurchmobileproject.Basic.Church;
+import com.example.helio.gotochurchmobileproject.Basic.Coordenador;
 import com.example.helio.gotochurchmobileproject.Basic.Setor;
+import com.example.helio.gotochurchmobileproject.Util.SetoresAdapter;
+import com.example.helio.gotochurchmobileproject.Util.WebService;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -28,18 +38,19 @@ import java.util.List;
 public class SectorFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
-    private String mParam2;
-
+    private int mParam1Layout;
     private OnFragmentInteractionListener mListener;
 
-
-    private ListView listaServicos;
+    private WebService ws = new WebService();
+    public String URL = "http://dayvsonnascimento.pythonanywhere.com/gotochurch/setor/listaSetores";
+    private ListView listaSectors;
     List<Setor> setores;
+    Setor mSetor;
+    private static final String EXTRA_SECTOR = "sector";
 
     public SectorFragment() {
         // Required empty public constructor
@@ -50,15 +61,13 @@ public class SectorFragment extends Fragment {
      * this fragment using the provided parameters.
      *
      * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment SectorFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SectorFragment newInstance(String param1, String param2) {
+    public static SectorFragment newInstance(int param1) {
         SectorFragment fragment = new SectorFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putInt(EXTRA_SECTOR, param1);
         fragment.setArguments(args);
         return fragment;
     }
@@ -70,14 +79,16 @@ public class SectorFragment extends Fragment {
         servicos = fachada.ListarServicosUsuario(fachada.usuarioLogado());
         ListaAdapterServico adapterServico = new ListaAdapterServico(getActivity(), (ArrayList<Servico>) servicos);
         listaServicos.setAdapter(adapterServico);*/
+        //GTC_ChurchListActivity obj =  new GTC_ChurchListActivity();
+        //obj.listChurch();
+        listSetores();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            mParam1Layout = getArguments().getInt(EXTRA_SECTOR);
         }
     }
 
@@ -100,16 +111,7 @@ public class SectorFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof SectorFragment.OnFragmentInteractionListener) {
-            mListener = (SectorFragment.OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
+
 
 
     @Override
@@ -133,19 +135,72 @@ public class SectorFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_church, container, false);
-        listaServicos = (ListView) view.findViewById(R.id.lvChurchFragment);
-        listaServicos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View v, int pos, long id) {
+        View view = inflater.inflate(
+                R.layout.fragment_church, container, false);
+        listaSectors = (ListView) view.findViewById(R.id.lvSectorFragment);
+        //listaSectors.requestFocus();
 
-                Intent it = new Intent(getActivity(), GTC_ListaSetores.class);
-                it.putExtra("Setores", setores.get(pos));
-                startActivity(it);
-            }
-        });
+        if (mSetor != null) {
+            SetoresAdapter ad = new SetoresAdapter(getContext(), R.layout.content_gtc_listview, setores);
+            listaSectors.setAdapter(ad);
+        }
         return view;
     }
 
+
+
+    private void listSetores(){
+        try {
+            String stringSetores = this.ws.getUrlContents(this.URL); //Chama função que consome o web service
+
+            JSONArray setoresJson = new JSONArray(stringSetores);
+            JSONObject setor;
+
+            int idCoordenador;
+            int idSetor;
+            int numero;
+            String nomeCoordenador;
+
+            //ListView lista = (ListView) findViewById(R.id.listViewSetores);
+
+            this.setores = new ArrayList<>();
+
+            for (int i = 0; i < setoresJson.length(); i++) {
+                setor = new JSONObject(setoresJson.getString(i));
+
+                Setor s = new Setor(); //objeto setor
+                Coordenador co = new Coordenador();// objeto Coordenador
+
+                idCoordenador = Integer.parseInt(setor.getString("idcoordenador"));
+                idSetor = Integer.parseInt(setor.getString("id"));
+
+                numero = Integer.parseInt(setor.getString("numero"));
+                nomeCoordenador = setor.getString("coordenador");
+
+                co.setId(idCoordenador);
+                co.setName(nomeCoordenador);
+
+                s.setId(idSetor);
+                s.setNumero(numero);
+                s.setCoordenador(co);
+
+
+                this.setores.add(s);
+
+                //String setorInfo = "Setor 0"+numero+" | Coordenador: "+nomeCoordenador;
+                //strings[i] = setorInfo;
+
+
+            }
+
+
+
+
+
+        }catch (Exception e){
+            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+
+    }
 
 }

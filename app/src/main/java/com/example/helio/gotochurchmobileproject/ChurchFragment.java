@@ -10,10 +10,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.example.helio.gotochurchmobileproject.Basic.Address;
 import com.example.helio.gotochurchmobileproject.Basic.Church;
 import com.example.helio.gotochurchmobileproject.Fachada.Fachada;
+import com.example.helio.gotochurchmobileproject.Util.ChurchAdapter;
+import com.example.helio.gotochurchmobileproject.Util.WebService;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class ChurchFragment extends Fragment {
@@ -23,16 +31,18 @@ public class ChurchFragment extends Fragment {
     private ListView listaChurchs;
     List<Church> churchs;
     private Church mChurch;
+    private int layout;
     private static final String EXTRA_CHURCH = "church";
     private ListView lvChurch;
-
+    private WebService ws = new WebService();
+    public String URL = "http://dayvsonnascimento.pythonanywhere.com/gotochurch/congregacao/listarCongregacao";
     public ChurchFragment() {
         // Required empty public constructor
     }
 
-    public static ChurchFragment newInstance(Church church) {
+    public static ChurchFragment newInstance(int church) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable(EXTRA_CHURCH, church);
+        bundle.putInt(EXTRA_CHURCH, church);
         ChurchFragment dialog = new ChurchFragment();
         dialog.setArguments(bundle);
         return dialog;
@@ -42,9 +52,11 @@ public class ChurchFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
-            mChurch = (Church) getArguments().getSerializable(EXTRA_CHURCH);
+            layout = getArguments().getInt(EXTRA_CHURCH);
         }
+        carregarLista();
     }
 
     public void onButtonPressed(Uri uri) {
@@ -53,16 +65,6 @@ public class ChurchFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
 
     @Override
     public void onDetach() {
@@ -82,21 +84,6 @@ public class ChurchFragment extends Fragment {
         carregarLista();
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_church, container, false);
-        listaChurchs = (ListView) view.findViewById(R.id.lvChurchFragment);
-        listaServicos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View v, int pos, long id) {
-
-                Intent it = new Intent(getActivity(), GTC_ChurchListActivity.class);
-                it.putExtra("Church", churchs.get(pos));
-                startActivity(it);
-            }
-        });
-        return view;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -104,15 +91,16 @@ public class ChurchFragment extends Fragment {
         View layout = inflater.inflate(
                 R.layout.fragment_church, container, false);
         listaChurchs = (ListView) layout.findViewById(R.id.lvChurchFragment);
-        listaChurchs.requestFocus();
-
-        if (mChurch != null) {
-            listaChurchs.setText(mChurch.);
+        //listaChurchs.requestFocus();
+        //Toast.makeText(getContext(), ""+churchs, Toast.LENGTH_SHORT).show();
+        if (churchs != null) {
+            ChurchAdapter ad = new ChurchAdapter(getContext(), R.layout.content_gtc_listview, churchs);
+            listaChurchs.setAdapter(ad);
         }
         // Exibe o teclado virtual ao exibir o Dialog
-        getDialog().getWindow().setSoftInputMode(
+       /* getDialog().getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        getDialog().setTitle(R.string.acao_novo);
+        getDialog().setTitle(R.string.acao_novo);*/
         return layout;
     }
 
@@ -125,7 +113,69 @@ public class ChurchFragment extends Fragment {
         ListaAdapterServico adapterServico = new ListaAdapterServico(getActivity(), (ArrayList<Servico>) servicos);
         listaServicos.setAdapter(adapterServico);*/
 
-        GTC_ChurchListActivity obj =  new GTC_ChurchListActivity();
-        obj.listChurch();
+        //GTC_ChurchListActivity obj =  new GTC_ChurchListActivity();
+        //obj.listChurch();
+        listChurch();
+    }
+
+
+    public void listChurch(){
+
+        try {
+            String stringChurch = this.ws.getUrlContents(this.URL); //Chama função que consome o web service
+
+            JSONArray churchJson = new JSONArray(stringChurch);
+            JSONObject church;
+
+            //Toast.makeText(this, this.URL, Toast.LENGTH_LONG).show();
+
+            //int idChurch;
+            //int idSetor;
+            //int numero;
+
+            //ListView lista = (ListView) layout.findViewById(R.id.listViewChurch);
+            //String[] strings = new String[churchJson.length()];
+            this.churchs = new ArrayList<>();
+
+            for (int i = 0; i < churchJson.length(); i++) {
+                church = new JSONObject(churchJson.getString(i));
+
+                Church c = new Church();
+                Address a = new Address();
+                c.setId(Integer.parseInt(church.getString("id")));
+                c.setName(church.getString("nome"));
+                c.setResponsible("Coordenador: "+church.getString("coordenador"));
+
+
+                a.setCity(church.getString("cidade"));
+                a.setHomeNumber(church.getString("numero"));
+                a.setStreetName(church.getString("rua"));
+                a.setDistrict(church.getString("bairro"));
+                a.setState("Pernambuco");
+
+
+                c.setAddress(a);
+                //Toast.makeText(this, church.getString("nome"), Toast.LENGTH_LONG).show();
+                this.churchs.add(c);
+
+
+
+                //String setorInfo = "Setor 0"+numero+" | Coordenador: "+nomeCoordenador;
+                //strings[i] = setorInfo;
+
+
+            }
+
+            //ChurchAdapter ad = new ChurchAdapter(getContext(), R.layout.content_gtc_listview, this.church);
+            //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, strings);
+
+            //mChurch.setAdapter(ad);
+
+
+
+        }catch (Exception e){
+            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+
     }
 }

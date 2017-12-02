@@ -8,6 +8,7 @@ public class Setor {
     private int id;
     private int numero;
     private Coordenador coordenador;
+    private Area area;
 
     public int getNumero() {
         return numero;
@@ -32,4 +33,8 @@ public class Setor {
     public void setId(int id) {
         this.id = id;
     }
+
+    public Area getArea() { return area; }
+
+    public void setArea(Area area) { this.area = area; }
 }

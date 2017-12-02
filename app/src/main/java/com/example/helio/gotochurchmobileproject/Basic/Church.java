@@ -15,8 +15,8 @@ public class Church implements Serializable{
     private Address address;
     private String adjunct;
     private int resIdImagem;
-    private double lat;
-    private double lng;
+    private long lat;
+    private long lng;
 
     public String getName() {
         return name;
@@ -66,19 +66,19 @@ public class Church implements Serializable{
         this.id = id;
     }
 
-    public double getLat() {
+    public long getLat() {
         return lat;
     }
 
-    public void setLat(double lat) {
+    public void setLat(long lat) {
         this.lat = lat;
     }
 
-    public double getLng() {
+    public long getLng() {
         return lng;
     }
 
-    public void setLng(double lng) {
+    public void setLng(long lng) {
         this.lng = lng;
     }
 }

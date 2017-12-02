@@ -42,7 +42,7 @@ public class GTC_MapsActivity extends FragmentActivity implements OnMapReadyCall
         mapFragment.getMapAsync(this);
 
         ws = new WebService();
-
+        this.listChurch();
 
     }
 
@@ -67,13 +67,13 @@ public class GTC_MapsActivity extends FragmentActivity implements OnMapReadyCall
                 if(church.getString("latitude").equals("")){
                     c.setLat(0);
                 }else{
-                    c.setLat(Double.parseDouble(church.getString("latitude")));
+                    c.setLat(Long.parseLong(church.getString("latitude")));
                 }
 
                 if(church.getString("logitude").equals("")){
                     c.setLng(0);
                 }else{
-                    c.setLng(Double.parseDouble(church.getString("logitude")));
+                    c.setLng(Long.parseLong(church.getString("logitude")));
                 }
 
 
@@ -111,21 +111,21 @@ public class GTC_MapsActivity extends FragmentActivity implements OnMapReadyCall
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        /**/LatLng sydney = new LatLng(-34, 151);
-        LatLng sydney2 = new LatLng(-34, 141);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney").icon(BitmapDescriptorFactory.fromResource(R.drawable.churchmarker)));
-        mMap.addMarker(new MarkerOptions().position(sydney2).title("Marker in Sydney2").icon(BitmapDescriptorFactory.fromResource(R.drawable.churchmarker)));
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 4));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney2));
-        //mMap.setMinZoomPreference(1);
-        //mMap.setMaxZoomPreference(3);
+        //LatLng sydney = new LatLng(-34, 151);
+        //LatLng sydney2 = new LatLng(-34, 141);
+        //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney").icon(BitmapDescriptorFactory.fromResource(R.drawable.churchmarker)));
+        //mMap.addMarker(new MarkerOptions().position(sydney2).title("Marker in Sydney2").icon(BitmapDescriptorFactory.fromResource(R.drawable.churchmarker)));
+
+        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 4));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney2));
+
         Toast.makeText(this, ""+this.church, Toast.LENGTH_SHORT).show();
-        /*for (Church c: this.church){
+
+        for (Church c: this.church){
             LatLng p = new LatLng(c.getLat(), c.getLng());
             mMap.addMarker(new MarkerOptions().position(p).title(c.getName()).icon(BitmapDescriptorFactory.fromResource(R.drawable.churchmarker)));
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(p, 4));
-        }*/
+        }
 
         /*try{
 

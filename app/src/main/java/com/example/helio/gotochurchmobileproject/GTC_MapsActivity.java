@@ -1,14 +1,9 @@
 package com.example.helio.gotochurchmobileproject;
 
-import android.content.Context;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -48,22 +43,28 @@ public class GTC_MapsActivity extends FragmentActivity implements OnMapReadyCall
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        /*LatLng sydney = new LatLng(-34, 151);
+        /**/LatLng sydney = new LatLng(-34, 151);
         LatLng sydney2 = new LatLng(-34, 141);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney").icon(BitmapDescriptorFactory.fromResource(R.drawable.churchmarker)));
         mMap.addMarker(new MarkerOptions().position(sydney2).title("Marker in Sydney2").icon(BitmapDescriptorFactory.fromResource(R.drawable.churchmarker)));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney2));*/
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 4));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney2));
+        //mMap.setMinZoomPreference(1);
+        //mMap.setMaxZoomPreference(3);
 
+        /*try{
 
-        try{
+            Uri local = Uri.parse("geo:0,0?q=rua+21+de+abril,+43,+escada,+pernambuco,+brasil");
+
             LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
             LocationListener locationListener = new LocationListener() {
                 public void onLocationChanged(Location location) {
-                    LatLng latlng = new LatLng(location.getLatitude(), location.getLongitude());
+                    LatLng latlng = new LatLng(-34, 141);//new LatLng(location.getLatitude(), location.getLongitude());
                     mMap.addMarker(new MarkerOptions().position(latlng).title("Sua Localização").icon(BitmapDescriptorFactory.fromResource(R.drawable.churchmarker)));
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(latlng));
+                    mMap.setMinZoomPreference(11);
                 }
 
                 public void onStatusChanged(String provider, int status, Bundle extras) { }
@@ -76,7 +77,7 @@ public class GTC_MapsActivity extends FragmentActivity implements OnMapReadyCall
 
         }catch(SecurityException ex){
             Toast.makeText(this, ex.getMessage(), Toast.LENGTH_LONG).show();
-        }
+        }*/
     }
 
     void voltar(View v){

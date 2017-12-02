@@ -1,10 +1,12 @@
 package com.example.helio.gotochurchmobileproject.Basic;
 
+import java.io.Serializable;
+
 /**
  * Created by helio on 04/11/2017.
  */
 
-public class Church {
+public class Church implements Serializable{
 
     private Integer id;
     private String name;

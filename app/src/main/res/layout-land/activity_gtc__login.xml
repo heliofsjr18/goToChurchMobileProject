@@ -48,7 +48,7 @@
         android:layout_marginLeft="24dp" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/button"
         style="@android:style/Widget.Button.Inset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
         android:layout_marginLeft="80dp" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/button_signUp"
         android:layout_width="222dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -68,6 +68,6 @@
         android:text="@string/Register"
         android:background="@color/CornflowerBlue"
         app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/button3"
+        app:layout_constraintTop_toBottomOf="@+id/button"
         android:layout_marginLeft="20dp" />
 </android.support.constraint.ConstraintLayout>

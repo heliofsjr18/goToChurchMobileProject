@@ -43,7 +43,16 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
     // Returns the page title for the top indicator
     @Override
     public CharSequence getPageTitle(int position) {
-        return "Lista " + position;
+        CharSequence titulo = "Lista" + position;
+        if(position == 0){
+            titulo =  "Congregações ";
+        }
+
+        if(position == 1){
+            titulo = "Setores ";
+        }
+        
+        return titulo;
     }
 
 

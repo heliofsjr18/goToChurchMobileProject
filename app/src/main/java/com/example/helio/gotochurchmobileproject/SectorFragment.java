@@ -90,6 +90,7 @@ public class SectorFragment extends Fragment {
         if (getArguments() != null) {
             mParam1Layout = getArguments().getInt(EXTRA_SECTOR);
         }
+        carregarLista();
     }
 
 

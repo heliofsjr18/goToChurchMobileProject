@@ -100,7 +100,7 @@ public class GTC_ChurchListActivity extends AppCompatActivity implements Adapter
 
 
 
-    private void listChurch(){
+    public void listChurch(){
         try {
             String stringChurch = this.ws.getUrlContents(this.URL); //Chama função que consome o web service
 

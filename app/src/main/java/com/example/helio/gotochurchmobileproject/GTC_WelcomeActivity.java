@@ -146,4 +146,8 @@ public class GTC_WelcomeActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+    void cardViewCLick(View v)
+    {
+        Toast.makeText(this, "teste", Toast.LENGTH_SHORT).show();
+    }
 }

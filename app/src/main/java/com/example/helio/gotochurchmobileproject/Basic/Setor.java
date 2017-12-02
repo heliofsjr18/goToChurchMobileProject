@@ -1,10 +1,12 @@
 package com.example.helio.gotochurchmobileproject.Basic;
 
+import java.io.Serializable;
+
 /**
  * Created by dayvson on 25/11/17.
  */
 
-public class Setor {
+public class Setor implements Serializable{
     private int id;
     private int numero;
     private Coordenador coordenador;

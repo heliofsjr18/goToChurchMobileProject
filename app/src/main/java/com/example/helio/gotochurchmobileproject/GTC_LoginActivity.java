@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.helio.gotochurchmobileproject.Basic.User;
+import com.example.helio.gotochurchmobileproject.Data.DAOUser;
 import com.example.helio.gotochurchmobileproject.Util.WebConection;
 import com.example.helio.gotochurchmobileproject.Util.WebService;
 
@@ -55,6 +57,7 @@ public class GTC_LoginActivity extends AppCompatActivity {
 
         ws = new WebService();
         boolean retorno = false;
+
         try{
 
             String resultado = ws.getUrlContents(this.URL);  //Chama função que consome o web service
@@ -91,6 +94,37 @@ public class GTC_LoginActivity extends AppCompatActivity {
             if(this.verificaLogin()){
                 Bundle bundle = new Bundle();
                 bundle.putString("dadosUsuario", this.dadosUsuario);
+
+                try {
+                    JSONArray resultJson = new JSONArray(this.dadosUsuario);
+                    JSONObject result;
+
+                    for (int i = 0; i < resultJson.length(); i++) {
+                        result = new JSONObject(resultJson.getString(i));
+
+                        JSONArray dadosJson = new JSONArray(result.getString("dados"));
+                        JSONObject dados;
+
+                        for (int x = 0; x < dadosJson.length(); x++) {
+                            dados = new JSONObject(dadosJson.getString(x));//pega dados do usuario
+                            User u = new User();
+
+                            u.setId(Integer.parseInt(dados.getString("id")));
+                            u.setName(dados.getString("first_name"));
+                            u.setEmail(dados.getString("email"));
+                            u.setPassword(dados.getString("senha"));
+
+
+
+                            DAOUser daoUser = new DAOUser(getBaseContext());
+                            daoUser.insereUsuario(u);
+                        }
+                    }
+                }catch (Exception e){
+
+                }
+
+
                 Intent it = new Intent(this, GTC_WelcomeActivity.class);
                 it.putExtras(bundle);
                 startActivity(it);

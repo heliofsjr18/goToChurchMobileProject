@@ -1,5 +1,6 @@
 package com.example.helio.gotochurchmobileproject;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -114,7 +115,7 @@ public class GTC_WelcomeActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_out) {
             return true;
         }
 
@@ -132,13 +133,16 @@ public class GTC_WelcomeActivity extends AppCompatActivity
             Intent it = new Intent(this, GTC_ListaSetores.class);
             startActivity(it);
         } else if (id == R.id.nav_area) {
-
+            Intent it = new Intent(this, GTC_ListaAreaActivity.class);
+            startActivity(it);
         } else if (id == R.id.nav_congregacao) {
             Intent it = new Intent(this, GTC_ChurchListActivity.class);
             startActivity(it);
-        } else if (id == R.id.nav_manage) {
-
-        }/* else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_about) {
+            Dialog dialog = new Dialog(this, R.style.Theme_AppCompat_Dialog);
+            dialog.setContentView(R.layout.gtc_content_about_popup);
+            dialog.show();
+        } /*else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
 
@@ -153,7 +157,7 @@ public class GTC_WelcomeActivity extends AppCompatActivity
         Toast.makeText(this, "teste", Toast.LENGTH_SHORT).show();
     }
 
-    void pgv(View v){
+    void pgView(View v){
         Intent it = new Intent(this, GTC_PageViewActivity.class);
         startActivity(it);
     }

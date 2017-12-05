@@ -24,6 +24,10 @@
     <string name="name">Email</string>
     <string name="password" >Senha</string>
 
+    <string name="quick_acsess">Acesso Rápido</string>
+    <string name="favorits">Favoritos</string>
+    <string name="action_out">Sair</string>
+
     <!-- SignUpLayOut-->
     <string name="signUpName">Nome</string>
     <string name="signUpBirthday">Data de Nascimento</string>
@@ -44,5 +48,7 @@
     <string name="SignUpLayOutPassword">Senha</string>
     <string name="title_activity_gtc__lista_setores">Setores</string>
     <string name="title_activity_gtc__church_list">Congregações</string>
+    <string name="title_activity_gtc__lista_area">Áreas</string>
+    <string name="about">Sobre</string>
     <!-- SignUpLayOut-->
 </resources>

@@ -1,10 +1,10 @@
 package com.example.helio.gotochurchmobileproject.Util;
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.example.helio.gotochurchmobileproject.AreaFragment;
 import com.example.helio.gotochurchmobileproject.ChurchFragment;
 import com.example.helio.gotochurchmobileproject.R;
 import com.example.helio.gotochurchmobileproject.SectorFragment;
@@ -14,11 +14,13 @@ import com.example.helio.gotochurchmobileproject.SectorFragment;
  */
 
 public class MyPagerAdapter extends FragmentPagerAdapter {
-    private static int NUM_ITEMS = 2;
+    private static int NUM_ITEMS = 3;
     FragmentPagerAdapter adapterViewPager;
+    private String titulos[] = new String[3];
 
-    public MyPagerAdapter(FragmentManager fragmentManager) {
+    public MyPagerAdapter(FragmentManager fragmentManager, String[] titulos) {
         super(fragmentManager);
+        this.titulos = titulos;
     }
 
     // Returns total number of pages.
@@ -35,6 +37,8 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
                 return ChurchFragment.newInstance(R.layout.fragment_church);
             case 1:
                 return SectorFragment.newInstance(R.layout.fragment_sector);
+            case 2:
+                return AreaFragment.newInstance(R.layout.fragment_area);
             default:
                 return null;
         }
@@ -45,11 +49,15 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         CharSequence titulo = "Lista" + position;
         if(position == 0){
-            titulo =  "Congregações ";
+            titulo =  ""+this.titulos[0];
         }
 
         if(position == 1){
-            titulo = "Setores ";
+            titulo = ""+this.titulos[1];
+        }
+
+        if(position == 2){
+            titulo = ""+this.titulos[2];
         }
         
         return titulo;

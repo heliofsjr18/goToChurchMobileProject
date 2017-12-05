@@ -125,7 +125,7 @@ public class GTC_MapsActivity extends FragmentActivity implements OnMapReadyCall
             //LatLng l = new LatLng(-8.056030,0);
             LatLng p = new LatLng(c.getLat(), c.getLng());
             mMap.addMarker(new MarkerOptions().position(p).title(c.getName()).icon(BitmapDescriptorFactory.fromResource(R.drawable.churchmarker)));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(p, 5));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(p, 9));
         }
 
         /*try{

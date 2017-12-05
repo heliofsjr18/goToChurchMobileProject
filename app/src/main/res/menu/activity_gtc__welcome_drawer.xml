@@ -7,11 +7,11 @@
         <item
             android:id="@+id/nav_setor"
             android:icon="@drawable/setor"
-            android:title="Setor" />
+            android:title="@string/title_activity_gtc__lista_setores" />
         <item
             android:id="@+id/nav_area"
             android:icon="@drawable/area"
-            android:title="Área" />
+            android:title="@string/title_activity_gtc__lista_area" />
         <!--<item
             android:id="@+id/nav_slid"
             android:icon="@drawable/church-icon"
@@ -19,11 +19,11 @@
         <item
             android:id="@+id/nav_congregacao"
             android:icon="@drawable/church"
-            android:title="Congregação" />
+            android:title="@string/title_activity_gtc__church_list" />
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Configurações" />
+            android:id="@+id/nav_about"
+            android:icon="@android:drawable/ic_dialog_info"
+            android:title="@string/about" />
     </group>
 
     <!--<item android:title="Communicate">

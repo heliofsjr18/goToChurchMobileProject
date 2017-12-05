@@ -1,6 +1,5 @@
 package com.example.helio.gotochurchmobileproject;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,7 +13,6 @@ import android.widget.Toast;
 
 import com.example.helio.gotochurchmobileproject.Basic.Address;
 import com.example.helio.gotochurchmobileproject.Basic.Church;
-import com.example.helio.gotochurchmobileproject.Fachada.Fachada;
 import com.example.helio.gotochurchmobileproject.Util.ChurchAdapter;
 import com.example.helio.gotochurchmobileproject.Util.WebService;
 
@@ -57,6 +55,28 @@ public class ChurchFragment extends Fragment {
             layout = getArguments().getInt(EXTRA_CHURCH);
         }
         carregarLista();
+
+        /*listaChurchs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Church church = (Church) lvChurch.getItemAtPosition(position);
+
+                String rua = church.getAddress().getStreetName();
+                String bairro = church.getAddress().getDistrict();
+                String numero = church.getAddress().getHomeNumber();
+                String cidade = church.getAddress().getCity();
+                String estado = church.getAddress().getState();
+                String pais = "Brasil";
+
+
+                Uri gmmIntentUri = Uri.parse("google.navigation:q="+rua+",+"+numero+",+"+cidade+"+-+"+estado+",+"+pais);
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                startActivity(mapIntent);
+
+            }
+        });*/
     }
 
     public void onButtonPressed(Uri uri) {
@@ -97,6 +117,34 @@ public class ChurchFragment extends Fragment {
             ChurchAdapter ad = new ChurchAdapter(getContext(), R.layout.content_gtc_listview, churchs);
             listaChurchs.setAdapter(ad);
         }
+
+        /**/
+        try{
+        listaChurchs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Church church = (Church) listaChurchs.getItemAtPosition(position);
+
+                String rua = church.getAddress().getStreetName();
+                String bairro = church.getAddress().getDistrict();
+                String numero = church.getAddress().getHomeNumber();
+                String cidade = church.getAddress().getCity();
+                String estado = church.getAddress().getState();
+                String pais = "Brasil";
+
+
+                Uri gmmIntentUri = Uri.parse("google.navigation:q="+rua+",+"+numero+",+"+cidade+"+-+"+estado+",+"+pais);
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                startActivity(mapIntent);
+
+            }
+        });}catch (Exception e){
+            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+
+
         // Exibe o teclado virtual ao exibir o Dialog
        /* getDialog().getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);

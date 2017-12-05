@@ -1,20 +1,15 @@
 package com.example.helio.gotochurchmobileproject;
 
 //import android.app.Fragment;
-import android.support.v4.app.Fragment;
-import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.helio.gotochurchmobileproject.Basic.Church;
 import com.example.helio.gotochurchmobileproject.Basic.Coordenador;
 import com.example.helio.gotochurchmobileproject.Basic.Setor;
 import com.example.helio.gotochurchmobileproject.Util.SetoresAdapter;
@@ -137,14 +132,14 @@ public class SectorFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(
-                R.layout.fragment_church, container, false);
+                R.layout.fragment_sector, container, false);
         listaSectors = (ListView) view.findViewById(R.id.lvSectorFragment);
         //listaSectors.requestFocus();
-
-        if (mSetor != null) {
+        if (setores != null) {
             SetoresAdapter ad = new SetoresAdapter(getContext(), R.layout.content_gtc_listview, setores);
             listaSectors.setAdapter(ad);
         }
+
         return view;
     }
 

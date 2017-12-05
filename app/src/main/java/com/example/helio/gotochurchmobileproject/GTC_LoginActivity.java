@@ -54,7 +54,7 @@ public class GTC_LoginActivity extends AppCompatActivity {
         String senha = String.valueOf(editTextSenha.getText());//pega valor do editTest de senha
         this.URL = "http://dayvsonnascimento.pythonanywhere.com/gotochurch/usuario/login";
         this.URL += "?email="+email+"&senha="+senha;
-
+        Toast.makeText(this, this.URL, Toast.LENGTH_LONG).show();
         ws = new WebService();
         boolean retorno = false;
 
@@ -62,7 +62,7 @@ public class GTC_LoginActivity extends AppCompatActivity {
 
             String resultado = ws.getUrlContents(this.URL);  //Chama função que consome o web service
 
-            JSONArray resultJson = new JSONArray(resultado);// coverte a string de resultado em um array Json
+            /**/JSONArray resultJson = new JSONArray(resultado);// coverte a string de resultado em um array Json
             JSONObject result;
             int numResultado = 0;
 
@@ -119,7 +119,7 @@ public class GTC_LoginActivity extends AppCompatActivity {
 
                             DAOUser daoUser = new DAOUser(getBaseContext());
                             Toast.makeText(this, "SQLite", Toast.LENGTH_SHORT).show();
-                            daoUser.insereUsuario(u);
+                            //daoUser.insereUsuario(u);
                         }
                     }
 
@@ -129,13 +129,15 @@ public class GTC_LoginActivity extends AppCompatActivity {
                     it.putExtras(bundle);
                     startActivity(it);
                 }else{
-                    Toast.makeText(this, "Login Inválido!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Login Inválido!", Toast.LENGTH_LONG).show();
                 }
             }else{
-                Toast.makeText(this, "Verifique sua conexão com a internet!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Verifique sua conexão com a internet!", Toast.LENGTH_LONG).show();
             }
 
         }catch (Exception e){
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }

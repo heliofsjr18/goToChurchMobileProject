@@ -7,9 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.helio.gotochurchmobileproject.Util.WebConection;
 import com.example.helio.gotochurchmobileproject.Util.WebService;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class GTC_NewAddressActivity extends AppCompatActivity {
 
@@ -64,22 +68,53 @@ public class GTC_NewAddressActivity extends AppCompatActivity {
         String bairro = String.valueOf(editText_district.getText());
         String num = String.valueOf(editText_homeNumber.getText());
         String rua = String.valueOf(editText_streetName.getText());
+        try {
+            wc = new WebConection();
+            if (wc.isOnline(this)) {
+                this.URL += "?nome=" + this.nomeIgreja;
+                this.URL += "&coordenador=" + this.coordenadorSelecionado;
+                this.URL += "&qtd_assentos=" + this.assentos;
+                this.URL += "&rua=" + rua;
+                this.URL += "&bairro=" + bairro;
+                this.URL += "&cidade=" + cidade;
+                this.URL += "&complemento=";
+                this.URL += "&numero=" + num;
+                this.URL += "&latitude=";
+                this.URL += "&longitude=";
 
-        wc = new WebConection();
-        if(wc.isOnline(this)) {
-            this.URL += "?nome=" + this.nomeIgreja;
-            this.URL += "&coordenador=" + this.coordenadorSelecionado;
-            this.URL += "&qtd_assentos=" + this.assentos;
-            this.URL += "&rua=" + rua;
-            this.URL += "&bairro=" + bairro;
-            this.URL += "&cidade=" + cidade;
-            this.URL += "&complemento=";
-            this.URL += "&numero=" + num;
-            this.URL += "&latitude=";
-            this.URL += "&longitude=";
-        }else{
-            Snackbar.make(getCurrentFocus(), "Verifique sua conexão com a Internet", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+                ws = new WebService();
+                String resultado = ws.getUrlContents(this.URL);
+
+                JSONArray resultJson = new JSONArray(resultado);// coverte a string de resultado em um array Json
+                JSONObject result;
+
+                int numResultado = 0;
+                String errorMessage = "";
+
+                for (int i = 0; i < resultJson.length(); i++) {
+                    result = new JSONObject(resultJson.getString(i));
+
+                    numResultado = Integer.parseInt(result.getString("data"));
+
+                    if(numResultado == 0)
+                        errorMessage = result.getString("error");
+
+                }
+
+                if(numResultado == 0){
+                    Toast.makeText(this, "Error - ( "+errorMessage+" )", Toast.LENGTH_SHORT).show();
+                }else if(numResultado == 1){
+                    Toast.makeText(this, "Cadastrado", Toast.LENGTH_SHORT).show();
+                    Intent it = new Intent(this, GTC_WelcomeActivity.class);
+                    startActivity(it);
+                }
+
+            } else {
+                Snackbar.make(getCurrentFocus(), "Verifique sua conexão com a Internet", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        }catch (Exception e){
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 }

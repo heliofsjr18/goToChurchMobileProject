@@ -90,7 +90,7 @@ public class GTC_NewChurchActivity extends AppCompatActivity {
         dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(GTC_NewChurchActivity.this, ""+GTC_NewChurchActivity.this.users.get(position).getName(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(GTC_NewChurchActivity.this, ""+GTC_NewChurchActivity.this.users.get(position).getName(), Toast.LENGTH_SHORT).show();
                 GTC_NewChurchActivity.this.coordenadorSelecionado = GTC_NewChurchActivity.this.users.get(position).getId();
             }
 
@@ -115,23 +115,6 @@ public class GTC_NewChurchActivity extends AppCompatActivity {
             default:break;
         }
         return true;
-    }
-
-    public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
-
-        switch (position) {
-            case 0:
-                // Whatever you want to happen when the first item gets selected
-                Toast.makeText(this, this.users.get(position).getName(), Toast.LENGTH_SHORT).show();
-                break;
-            case 1:
-                // Whatever you want to happen when the second item gets selected
-                break;
-            case 2:
-                // Whatever you want to happen when the thrid item gets selected
-                break;
-
-        }
     }
 
 

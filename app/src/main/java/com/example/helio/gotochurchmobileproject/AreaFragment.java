@@ -178,6 +178,7 @@ public class AreaFragment extends Fragment {
 
 
         }catch (Exception e){
+            Toast.makeText(getContext(), "Area", Toast.LENGTH_LONG).show();
             Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
 

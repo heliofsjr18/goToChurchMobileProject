@@ -141,6 +141,7 @@ public class ChurchFragment extends Fragment {
 
             }
         });}catch (Exception e){
+            Toast.makeText(getContext(), "Church", Toast.LENGTH_LONG).show();
             Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
 

@@ -54,7 +54,6 @@ public class GTC_LoginActivity extends AppCompatActivity {
         String senha = String.valueOf(editTextSenha.getText());//pega valor do editTest de senha
         this.URL = "http://dayvsonnascimento.pythonanywhere.com/gotochurch/usuario/login";
         this.URL += "?email="+email+"&senha="+senha;
-        Toast.makeText(this, this.URL, Toast.LENGTH_LONG).show();
         ws = new WebService();
         boolean retorno = false;
 

@@ -5,79 +5,92 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.helio.gotochurchmobileproject.GTC_SignUpActivity"
-    android:background="@color/colorPrimaryDark">
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+</android.support.design.widget.AppBarLayout>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:paddingBottom="20dp">
 
     <ImageView
         android:id="@+id/imageView_signUp_Screen"
         android:layout_width="256dp"
         android:layout_height="275dp"
-        android:layout_marginBottom="64dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/editText_homeNumber"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_gravity="center"
         app:srcCompat="@drawable/iconchurchtoggle" />
 
     <EditText
         android:id="@+id/editText_city"
-        android:layout_width="164dp"
+        android:layout_width="190dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
+        android:layout_gravity="center"
         android:ems="10"
         android:hint="@string/city"
         android:inputType="textPersonName"
-        app:layout_constraintStart_toEndOf="@+id/editText_district"
-        app:layout_constraintTop_toBottomOf="@+id/editText_homeNumber" />
+        />
 
     <EditText
         android:id="@+id/editText_district"
-        android:layout_width="138dp"
+        android:layout_width="190dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_gravity="center"
         android:ems="10"
         android:hint="@string/district"
         android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_streetName" />
+         />
 
     <EditText
         android:id="@+id/editText_homeNumber"
-        android:layout_width="121dp"
+        android:layout_width="190dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_gravity="center"
         android:ems="10"
         android:hint="@string/homeNumber"
         android:inputType="textLongMessage"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_signUp_Screen" />
+        />
 
     <EditText
         android:id="@+id/editText_streetName"
-        android:layout_width="wrap_content"
+        android:layout_width="190dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_gravity="center"
         android:ems="10"
         android:hint="@string/streetName"
-        android:inputType="phone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_signUp_Screen"
-        android:layout_marginLeft="8dp" />
+        android:inputType="textLongMessage"
+        android:layout_marginBottom="20dp"
+        />
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/save"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_gravity="center"
+        android:text="@string/save" />
+    </LinearLayout>
+</ScrollView>
+
+
+</LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -22,7 +22,7 @@ public class GTC_SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gtc__sign_up);
 
-        findViewById(R.id.imageButton_address).setOnClickListener(buttonAddressOnClick);
+        //findViewById(R.id.imageButton_address).setOnClickListener(buttonAddressOnClick);
     }
 
 }

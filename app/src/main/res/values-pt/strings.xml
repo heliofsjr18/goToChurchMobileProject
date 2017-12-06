@@ -50,5 +50,9 @@
     <string name="title_activity_gtc__church_list">Congregações</string>
     <string name="title_activity_gtc__lista_area">Áreas</string>
     <string name="about">Sobre</string>
+    <string name="continuar">Continuar</string>
+    <string name="seat">Assentos</string>
+    <string name="address">Endereço</string>
+    <string name="finish">Finalizar Cadastro</string>
     <!-- SignUpLayOut-->
 </resources>

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -16,6 +17,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.helio.gotochurchmobileproject.Basic.User;
+import com.example.helio.gotochurchmobileproject.Data.DAOUser;
 import com.example.helio.gotochurchmobileproject.Util.GTC_PageViewActivity;
 
 import org.json.JSONArray;
@@ -117,6 +120,21 @@ public class GTC_WelcomeActivity extends AppCompatActivity
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_out) {
+            try {
+                DAOUser crud = new DAOUser(this);
+                User u = crud.carregaDados();
+                if(crud.delete(u)){
+                    Intent it = new Intent(this, GTC_LoginActivity.class);
+                    startActivity(it);
+                }else{
+                    Snackbar.make(getCurrentFocus(), "Não foi possível sair!", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+            }catch (Exception e){
+
+                Snackbar.make(getCurrentFocus(), "Erro ao sair - ( "+e.getMessage()+" )", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
             return true;
         }
 

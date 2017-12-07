@@ -96,7 +96,7 @@ public class GTC_NewAddressActivity extends AppCompatActivity {
                 this.URL += "&numero=" + num;
                 this.URL += "&latitude=";
                 this.URL += "&longitude=";
-                Toast.makeText(this, ""+this.URL, Toast.LENGTH_LONG).show();
+                
                 ws = new WebService();
                 String resultado = ws.getUrlContents(this.URL);
 

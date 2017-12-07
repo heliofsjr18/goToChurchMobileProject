@@ -80,4 +80,58 @@ public class DAOUser {
 
         return u;
     }
+
+
+    public boolean verifica(User u) throws Exception {
+        Cursor cursor;
+        String[] campos = {banco.ID, banco.NOME, banco.SENHA, banco.EMAIL, banco.ID_WS, banco.JSON};
+
+        db = banco.getReadableDatabase();
+
+        cursor = banco.getReadableDatabase().query(banco.TABELA, campos, banco.ID+"="+u.getId(), null, banco.ID, null, null);
+
+        boolean retorno = false;
+
+        try {
+
+            if (cursor != null) {
+
+                if (cursor.getCount() > 0){
+                    retorno = true;
+                }else{
+                    retorno = false;
+                }
+
+            }
+
+            db.close();
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+
+        return retorno;
+
+    }
+
+    public boolean delete(User u){
+        String where = banco.ID+"="+u.getId();
+        String[] campos = {banco.ID, banco.NOME, banco.SENHA, banco.EMAIL, banco.ID_WS, banco.JSON};
+        db = banco.getWritableDatabase();
+
+        db.execSQL("DELETE FROM "+ banco.TABELA+ " WHERE "+where);
+        db.close();
+        boolean retorno = false;
+
+        try{
+            retorno = verifica(u);
+        }catch (Exception e){
+
+        }
+
+        if(retorno)
+            return false;
+        else
+            return true;
+
+    }
 }

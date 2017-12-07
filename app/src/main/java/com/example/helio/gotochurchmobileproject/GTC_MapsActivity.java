@@ -119,7 +119,7 @@ public class GTC_MapsActivity extends FragmentActivity implements OnMapReadyCall
         //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 4));
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney2));
 
-        Toast.makeText(this, ""+this.church, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, ""+this.church, Toast.LENGTH_SHORT).show();
 
         for (Church c: this.church){
             //LatLng l = new LatLng(-8.056030,0);

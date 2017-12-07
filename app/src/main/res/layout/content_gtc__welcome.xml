@@ -57,6 +57,7 @@
             android:text="@string/favorits"
             android:textColor="#fff"
             android:background="@color/colorPrimaryDark"
+            android:onClick="favorits"
             />
 
     </LinearLayout>

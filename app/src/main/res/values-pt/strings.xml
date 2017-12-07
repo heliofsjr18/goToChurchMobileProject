@@ -54,5 +54,6 @@
     <string name="seat">Assentos</string>
     <string name="address">Endereço</string>
     <string name="finish">Finalizar Cadastro</string>
+    <string name="title_activity_gtc__new_church">Nova Ingreja</string>
     <!-- SignUpLayOut-->
 </resources>

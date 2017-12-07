@@ -6,9 +6,13 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.helio.gotochurchmobileproject.Basic.User;
+import com.example.helio.gotochurchmobileproject.Data.DAOUser;
 import com.example.helio.gotochurchmobileproject.Util.WebConection;
 import com.example.helio.gotochurchmobileproject.Util.WebService;
 
@@ -23,6 +27,14 @@ public class GTC_NewAddressActivity extends AppCompatActivity {
     public int assentos;
     private WebService ws;
     private WebConection wc;
+
+    private View.OnClickListener onClickListenerSave = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            saveChurch(v);
+        }
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +56,9 @@ public class GTC_NewAddressActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);      //Ativar o botão
         getSupportActionBar().setTitle("Endereço - "+this.nomeIgreja);
 
+        Button bt = (Button) findViewById(R.id.button2);
+        bt.setOnClickListener(onClickListenerSave);
+
     }
 
     //Método de ações dos itens selecionados da ActionBar
@@ -59,7 +74,7 @@ public class GTC_NewAddressActivity extends AppCompatActivity {
     }
 
 
-    private void saveChurch(){
+    void saveChurch(View v){
         EditText editText_city = (EditText) findViewById(R.id.editText_city);
         EditText editText_district = (EditText) findViewById(R.id.editText_district);
         EditText editText_homeNumber = (EditText) findViewById(R.id.editText_homeNumber);
@@ -81,7 +96,7 @@ public class GTC_NewAddressActivity extends AppCompatActivity {
                 this.URL += "&numero=" + num;
                 this.URL += "&latitude=";
                 this.URL += "&longitude=";
-
+                Toast.makeText(this, ""+this.URL, Toast.LENGTH_LONG).show();
                 ws = new WebService();
                 String resultado = ws.getUrlContents(this.URL);
 
@@ -105,8 +120,21 @@ public class GTC_NewAddressActivity extends AppCompatActivity {
                     Toast.makeText(this, "Error - ( "+errorMessage+" )", Toast.LENGTH_SHORT).show();
                 }else if(numResultado == 1){
                     Toast.makeText(this, "Cadastrado", Toast.LENGTH_SHORT).show();
-                    Intent it = new Intent(this, GTC_WelcomeActivity.class);
-                    startActivity(it);
+
+                    try {
+                        DAOUser crud = new DAOUser(this);
+                        User u = crud.carregaDados();
+                        if (u != null){
+                            Bundle bundle = new Bundle();
+                            bundle.putString("dadosUsuario", u.getDados());
+
+                            Intent it = new Intent(this, GTC_WelcomeActivity.class);
+                            it.putExtras(bundle);
+                            startActivity(it);
+                        }
+                    }catch (Exception e){
+                        Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
                 }
 
             } else {

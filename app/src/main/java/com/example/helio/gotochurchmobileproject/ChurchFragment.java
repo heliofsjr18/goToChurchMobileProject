@@ -3,6 +3,7 @@ package com.example.helio.gotochurchmobileproject;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.helio.gotochurchmobileproject.Basic.Address;
 import com.example.helio.gotochurchmobileproject.Basic.Church;
+import com.example.helio.gotochurchmobileproject.Data.DAOFavoritChurch;
 import com.example.helio.gotochurchmobileproject.Util.ChurchAdapter;
 import com.example.helio.gotochurchmobileproject.Util.WebService;
 
@@ -27,6 +29,7 @@ public class ChurchFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     private ListView listaChurchs;
+    FloatingActionButton fab;
     List<Church> churchs;
     private Church mChurch;
     private int layout;
@@ -111,6 +114,7 @@ public class ChurchFragment extends Fragment {
         View layout = inflater.inflate(
                 R.layout.fragment_church, container, false);
         listaChurchs = (ListView) layout.findViewById(R.id.lvChurchFragment);
+        fab = (FloatingActionButton) layout.findViewById(R.id.fab);
         //listaChurchs.requestFocus();
         //Toast.makeText(getContext(), ""+churchs, Toast.LENGTH_SHORT).show();
         if (churchs != null) {
@@ -120,27 +124,67 @@ public class ChurchFragment extends Fragment {
 
         /**/
         try{
-        listaChurchs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            listaChurchs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Church church = (Church) listaChurchs.getItemAtPosition(position);
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Church church = (Church) listaChurchs.getItemAtPosition(position);
 
-                String rua = church.getAddress().getStreetName();
-                String bairro = church.getAddress().getDistrict();
-                String numero = church.getAddress().getHomeNumber();
-                String cidade = church.getAddress().getCity();
-                String estado = church.getAddress().getState();
-                String pais = "Brasil";
+                    String rua = church.getAddress().getStreetName();
+                    String bairro = church.getAddress().getDistrict();
+                    String numero = church.getAddress().getHomeNumber();
+                    String cidade = church.getAddress().getCity();
+                    String estado = church.getAddress().getState();
+                    String pais = "Brasil";
 
+                    Toast.makeText(getContext(), "Navegação GPS Iniciada...", Toast.LENGTH_SHORT).show();
 
-                Uri gmmIntentUri = Uri.parse("google.navigation:q="+rua+",+"+numero+",+"+cidade+"+-+"+estado+",+"+pais);
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                mapIntent.setPackage("com.google.android.apps.maps");
-                startActivity(mapIntent);
+                    Uri gmmIntentUri = Uri.parse("google.navigation:q="+rua+",+"+numero+",+"+cidade+"+-+"+estado+",+"+pais);
+                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                    mapIntent.setPackage("com.google.android.apps.maps");
+                    startActivity(mapIntent);
+
+                }
+            });
+            try{
+                listaChurchs.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                    @Override
+                    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                        Church church = (Church) listaChurchs.getItemAtPosition(position);
+                        DAOFavoritChurch daofc = new DAOFavoritChurch(getContext());
+
+                        if(daofc.insertChurch(church) == true){
+                            Toast.makeText(getContext(), "Adicionado aos favoritos!", Toast.LENGTH_LONG).show();
+
+                        }else{
+                            Toast.makeText(getContext(), "Não foi possivel adicionar aos favoritos!\nVerifique se já existe nos favoritos.", Toast.LENGTH_LONG).show();
+
+                        }
+
+                        return true;
+
+                    }
+                });
+            }catch (Exception e){
 
             }
-        });}catch (Exception e){
+
+
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*/
+
+                    Intent it = new Intent(getContext(), GTC_NewChurchActivity.class);
+                    startActivity(it);
+
+                }
+            });
+
+
+        }catch (Exception e){
             Toast.makeText(getContext(), "Church", Toast.LENGTH_LONG).show();
             Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }

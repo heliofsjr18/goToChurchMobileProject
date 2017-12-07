@@ -43,6 +43,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".GTC_NewChurchActivity"
+            android:label="@string/title_activity_gtc__new_church"
             android:screenOrientation="portrait" />
         <activity
             android:name=".GTC_WelcomeActivity"
@@ -85,7 +86,11 @@
             android:name=".GTC_ListaAreaActivity"
             android:label="@string/title_activity_gtc__lista_area"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Util.GTC_PageViewActivity"></activity>
+        <activity android:name=".Util.GTC_PageViewActivity" />
+        <activity
+            android:name=".GTC_FavoritsActivity"
+            android:label="@string/favorits"
+            ></activity>
     </application>
 
 </manifest>

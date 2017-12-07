@@ -14,7 +14,7 @@ public class User {
     private String email;
     private String phoneNumber;
     private Address address;
-    private String login;
+    private String dados;
     private String password;
 
     public String getName() {
@@ -57,12 +57,12 @@ public class User {
         this.address = address;
     }
 
-    public String getLogin() {
-        return login;
+    public String getDados() {
+        return dados;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setDados(String dados) {
+        this.dados = dados;
     }
 
     public String getPassword() {

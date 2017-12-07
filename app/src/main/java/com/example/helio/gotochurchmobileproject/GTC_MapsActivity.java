@@ -65,13 +65,13 @@ public class GTC_MapsActivity extends FragmentActivity implements OnMapReadyCall
                 c.setResponsible("Coordenador: "+church.getString("coordenador"));
 
                 if(church.getString("latitude").equals("")){
-                    c.setLat(0);
+                    c.setLat(-8.056031);
                 }else{
                     c.setLat(Double.parseDouble(church.getString("latitude")));
                 }
 
                 if(church.getString("logitude").equals("")){
-                    c.setLng(0);
+                    c.setLng(-34.893135);
                 }else{
                     c.setLng(Double.parseDouble(church.getString("logitude")));
                 }

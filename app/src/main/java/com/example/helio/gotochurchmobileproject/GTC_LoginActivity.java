@@ -1,6 +1,7 @@
 package com.example.helio.gotochurchmobileproject;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
@@ -29,7 +30,10 @@ public class GTC_LoginActivity extends AppCompatActivity {
     private View.OnClickListener onClickListenerSignUp = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intentSignUp = new Intent(GTC_LoginActivity.this, GTC_SignUpActivity.class);
+            //Intent intentSignUp = new Intent(GTC_LoginActivity.this, GTC_SignUpActivity.class);
+            //startActivity(intentSignUp);
+            Uri uri = Uri.parse("http://dayvsonnascimento.pythonanywhere.com/gotochurch/");
+            Intent intentSignUp = new Intent(Intent.ACTION_VIEW, uri);
             startActivity(intentSignUp);
         }
     };
@@ -43,6 +47,20 @@ public class GTC_LoginActivity extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
 
         findViewById(R.id.button_signUp).setOnClickListener(onClickListenerSignUp);
+        try {
+            DAOUser crud = new DAOUser(this);
+            User u = crud.carregaDados();
+            if (u != null){
+                Bundle bundle = new Bundle();
+                bundle.putString("dadosUsuario", u.getDados());
+
+                Intent it = new Intent(this, GTC_WelcomeActivity.class);
+                it.putExtras(bundle);
+                startActivity(it);
+            }
+        }catch (Exception e){
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 
     private boolean verificaLogin(){
@@ -113,12 +131,13 @@ public class GTC_LoginActivity extends AppCompatActivity {
                             u.setName(dados.getString("first_name"));
                             u.setEmail(dados.getString("email"));
                             u.setPassword(dados.getString("senha"));
+                            u.setDados(this.dadosUsuario);
 
 
 
                             DAOUser daoUser = new DAOUser(getBaseContext());
-                            Toast.makeText(this, "SQLite", Toast.LENGTH_SHORT).show();
-                            //daoUser.insereUsuario(u);
+                            //Toast.makeText(this, "SQLite", Toast.LENGTH_SHORT).show();
+                            daoUser.insereUsuario(u);
                         }
                     }
 
@@ -139,5 +158,11 @@ public class GTC_LoginActivity extends AppCompatActivity {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+        System.exit(0);
     }
 }

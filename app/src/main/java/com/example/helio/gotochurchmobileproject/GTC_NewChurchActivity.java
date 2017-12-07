@@ -156,18 +156,26 @@ public class GTC_NewChurchActivity extends AppCompatActivity {
         EditText cName = (EditText) findViewById(R.id.editText_name);
         EditText cAssentos = (EditText) findViewById(R.id.editText_name);
 
-        this.nomeIgreja = String.valueOf(cName.getText());
-        this.assentos = Integer.parseInt(String.valueOf(cAssentos.getText()));
 
-        Bundle b = new Bundle();
-        b.putString("nomeIgreja",this.nomeIgreja);
-        b.putInt("idCoordenador",this.coordenadorSelecionado);
-        b.putInt("assentos",this.assentos);
 
-        Toast.makeText(this, "Salvar", Toast.LENGTH_SHORT).show();
+        if(String.valueOf(cName.getText()).equals("")){
+            Toast.makeText(this, "Informe o nome!", Toast.LENGTH_SHORT).show();
+        }else if(String.valueOf(cAssentos.getText()).equals("")){
+            Toast.makeText(this, "Informe a quantidade de assentos!", Toast.LENGTH_SHORT).show();
+        }else{
+            this.nomeIgreja = String.valueOf(cName.getText());
+            this.assentos = Integer.parseInt(String.valueOf(cAssentos.getText()));
 
-        Intent it = new Intent(this, GTC_NewAddressActivity.class);
-        it.putExtras(b);
-        startActivity(it);
+            Bundle b = new Bundle();
+            b.putString("nomeIgreja",this.nomeIgreja);
+            b.putInt("idCoordenador",this.coordenadorSelecionado);
+            b.putInt("assentos",this.assentos);
+
+            Toast.makeText(this, "Salvar", Toast.LENGTH_SHORT).show();
+
+            Intent it = new Intent(this, GTC_NewAddressActivity.class);
+            it.putExtras(b);
+            startActivity(it);
+        }
     }
 }

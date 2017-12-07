@@ -42,8 +42,8 @@
     <string name="district">District</string>
     <string name="city">City</string>
     <string name="homeNumber">Home Number</string>
-    <string name="name" >Name</string>
-    <string name="password" >Password</string>
+    <string name="name">Name</string>
+    <string name="password">Password</string>
     <string name="quick_acsess">Quick Access</string>
     <string name="favorits">Favorits</string>
     <string name="action_out">Sing out</string>
@@ -53,5 +53,6 @@
     <string name="title_activity_gtc__church_list">Churchs</string>
     <string name="title_activity_gtc__lista_area">Areas</string>
     <string name="about">About</string>
+    <string name="title_activity_gtc__new_church">New Church</string>
     <!-- SignUpLayOut-->
 </resources>

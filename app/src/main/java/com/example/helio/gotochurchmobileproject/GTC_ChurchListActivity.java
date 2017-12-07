@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.helio.gotochurchmobileproject.Basic.Address;
 import com.example.helio.gotochurchmobileproject.Basic.Church;
+import com.example.helio.gotochurchmobileproject.Data.DAOFavoritChurch;
 import com.example.helio.gotochurchmobileproject.Util.ChurchAdapter;
 import com.example.helio.gotochurchmobileproject.Util.WebService;
 
@@ -65,7 +66,6 @@ public class GTC_ChurchListActivity extends AppCompatActivity implements Adapter
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Church church = (Church) lvChurch.getItemAtPosition(position);
-                Toast.makeText(GTC_ChurchListActivity.this, "id = "+id+", position+"+position+", bairro ="+church.getAddress().getDistrict()+", cidade="+church.getAddress().getCity()+", num="+church.getAddress().getHomeNumber(), Toast.LENGTH_SHORT).show();
 
                 String rua = church.getAddress().getStreetName();
                 String bairro = church.getAddress().getDistrict();
@@ -75,12 +75,30 @@ public class GTC_ChurchListActivity extends AppCompatActivity implements Adapter
                 String pais = "Brasil";
 
 
-                Toast.makeText(GTC_ChurchListActivity.this, "google.navigation:q="+rua+",+"+numero+"+-+"+bairro+",+"+cidade+"+-+"+estado+",+"+pais, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "Navegação GPS Iniciada...", Toast.LENGTH_SHORT).show();
 
                 Uri gmmIntentUri = Uri.parse("google.navigation:q="+rua+",+"+numero+",+"+cidade+"+-+"+estado+",+"+pais);
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                 mapIntent.setPackage("com.google.android.apps.maps");
                 startActivity(mapIntent);
+
+            }
+        });
+
+        lvChurch.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Church church = (Church) lvChurch.getItemAtPosition(position);
+                DAOFavoritChurch daofc = new DAOFavoritChurch(getBaseContext());
+
+                if(daofc.insertChurch(church) == true){
+                    Toast.makeText(GTC_ChurchListActivity.this, "Adicionado aos favoritos!", Toast.LENGTH_LONG).show();
+                    return true;
+                }else{
+                    Toast.makeText(GTC_ChurchListActivity.this, "Não foi possivel adicionar aos favoritos!\nVerifique se já existe nos favoritos.", Toast.LENGTH_LONG).show();
+                    return true;
+                }
 
             }
         });
@@ -138,6 +156,7 @@ public class GTC_ChurchListActivity extends AppCompatActivity implements Adapter
 
 
                 c.setAddress(a);
+                c.setDados(stringChurch);
                 //Toast.makeText(this, church.getString("nome"), Toast.LENGTH_LONG).show();
                 this.church.add(c);
 

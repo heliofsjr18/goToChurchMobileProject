@@ -15,14 +15,15 @@ public class DAOUser {
 
     private SQLiteDatabase db;
     private CriaBanco banco;
-
+    private Context c;
 
     public DAOUser(Context context){
-        banco = new CriaBanco(context);
+        banco = new CriaBanco(context, 1, "gtc.db");
+        c = context;
     }
 
 
-    public String insereDado(String nome, String email, String senha, int id_ws){
+    public String insereDado(String nome, String email, String senha, String json, int id_ws){
         ContentValues valores;
         long resultado;
 
@@ -31,6 +32,7 @@ public class DAOUser {
         valores.put(CriaBanco.NOME, nome);
         valores.put(CriaBanco.EMAIL, email);
         valores.put(CriaBanco.SENHA, senha);
+        valores.put(CriaBanco.JSON, json);
         valores.put(CriaBanco.ID_WS, id_ws);
 
         resultado = db.insert(CriaBanco.TABELA, null, valores);
@@ -44,24 +46,38 @@ public class DAOUser {
     }
 
     public String insereUsuario(User u){
-        return this.insereDado(u.getName(),u.getEmail(), u.getPassword(), u.getId());
+        return this.insereDado(u.getName(), u.getEmail(), u.getPassword(), u.getDados(), u.getId());
     }
 
-    public Cursor carregaDados(){
+    public User carregaDados() throws Exception {
 
         Cursor cursor;
-        String[] campos = {banco.ID, banco.NOME, banco.SENHA};
+        String[] campos = {banco.ID, banco.NOME, banco.SENHA, banco.EMAIL, banco.ID_WS, banco.JSON};
 
         db = banco.getReadableDatabase();
 
-        cursor = db.query(banco.TABELA, campos, null, null, null, null, null);
+        cursor = banco.getReadableDatabase().query(banco.TABELA, campos, null, null, banco.ID, null, null);
+        User u = null;
 
-        if (cursor != null){
-            cursor.moveToFirst();
+        try {
+
+            if (cursor != null) {
+                if (cursor.moveToNext()) {
+                    u = new User();
+                    u.setId(cursor.getInt(cursor.getColumnIndex(banco.ID)));
+                    u.setName(cursor.getString(cursor.getColumnIndex(banco.NOME)));
+                    u.setEmail(cursor.getString(cursor.getColumnIndex(banco.EMAIL)));
+                    u.setPassword(cursor.getString(cursor.getColumnIndex(banco.SENHA)));
+                    u.setDados(cursor.getString(cursor.getColumnIndex(banco.JSON)));
+                }
+                //cursor.moveToFirst();
+            }
+
+            db.close();
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
         }
 
-        db.close();
-
-        return cursor;
+        return u;
     }
 }

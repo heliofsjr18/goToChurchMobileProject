@@ -97,7 +97,8 @@ public class GTC_WelcomeActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            moveTaskToBack(true);
+            System.exit(0);
         }
     }
 
@@ -161,4 +162,12 @@ public class GTC_WelcomeActivity extends AppCompatActivity
         Intent it = new Intent(this, GTC_PageViewActivity.class);
         startActivity(it);
     }
+
+    void favorits(View v){
+        Intent it = new Intent(this, GTC_FavoritsActivity.class);
+        startActivity(it);
+    }
+
+
+
 }
